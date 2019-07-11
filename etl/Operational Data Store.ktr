@@ -436,8 +436,604 @@
   </info>
   <notepads>
   </notepads>
+  <connection>
+    <name>DWH</name>
+    <server>localhost</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>db_ava_2018</database>
+    <port>5432</port>
+    <username>postgres</username>
+    <password>Encrypted 2be98afc86aa7f2e4bb16bd64d980aac9</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>5432</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <order>
+    <hop>
+      <from>Dataset Atenei</from>
+      <to>Insert / update 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Dataset Roma Tre</from>
+      <to>Insert / update</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>Dataset Atenei</name>
+    <type>CsvInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <filename>/Users/Max/Downloads/StudentsDataWarehouse/data source/ava16_atenei_A7_20180331_anon.csv</filename>
+    <filename_field />
+    <rownum_field />
+    <include_filename>N</include_filename>
+    <separator>;</separator>
+    <enclosure />
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <format>mixed</format>
+    <encoding />
+    <fields>
+      <field>
+        <name>ANNO</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>CODICE</name>
+        <type>String</type>
+        <format />
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>8</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>DESCRIZIONE</name>
+        <type>String</type>
+        <format />
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>186</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>CODE_UN</name>
+        <type>String</type>
+        <format />
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>COD_ISTAT_COMUNE</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>COMUNE</name>
+        <type>String</type>
+        <format />
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>4</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>ID_PROVINCIA</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>PROVINCIA</name>
+        <type>String</type>
+        <format />
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>4</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>ID_REGIONE</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>REGIONE</name>
+        <type>String</type>
+        <format />
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>5</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>ID_REGIONE_MACRO_ISTAT</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>REGIONE_MACRO_ISTAT</name>
+        <type>String</type>
+        <format />
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>6</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>NUMERATORE</name>
+        <type>Number</type>
+        <format>#.#</format>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>8</length>
+        <precision>3</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>DENOMINATORE</name>
+        <type>Number</type>
+        <format>#.#</format>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>8</length>
+        <precision>1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>INDICATORE</name>
+        <type>Number</type>
+        <format>#.#</format>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>8</length>
+        <precision>3</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>NUM_ITA_NOTELE</name>
+        <type>Number</type>
+        <format>#.#</format>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>9</length>
+        <precision>3</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>DEN_ITA_NOTELE</name>
+        <type>Number</type>
+        <format>#.#</format>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>10</length>
+        <precision>3</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>IND_ITA_NOTELE</name>
+        <type>Number</type>
+        <format>#.#</format>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>9</length>
+        <precision>3</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>NUM_AREA_NOTELE</name>
+        <type>Number</type>
+        <format>#.#</format>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>9</length>
+        <precision>3</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>DEN_AREA_NOTELE</name>
+        <type>Number</type>
+        <format>#.#</format>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>10</length>
+        <precision>3</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>IND_AREA_NOTELE</name>
+        <type>Number</type>
+        <format>#.#</format>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>9</length>
+        <precision>3</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>192</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update 2</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>DWH</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>public</schema>
+      <table>data_atenei</table>
+      <key>
+        <name>ANNO</name>
+        <field>ANNO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>CODICE</name>
+        <field>CODICE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>DESCRIZIONE</name>
+        <field>DESCRIZIONE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>CODE_UN</name>
+        <field>CODE_UN</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>COD_ISTAT_COMUNE</name>
+        <field>COD_ISTAT_COMUNE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>COMUNE</name>
+        <field>COMUNE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_PROVINCIA</name>
+        <field>ID_PROVINCIA</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>PROVINCIA</name>
+        <field>PROVINCIA</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_REGIONE</name>
+        <field>ID_REGIONE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>REGIONE</name>
+        <field>REGIONE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_REGIONE_MACRO_ISTAT</name>
+        <field>ID_REGIONE_MACRO_ISTAT</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>REGIONE_MACRO_ISTAT</name>
+        <field>REGIONE_MACRO_ISTAT</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>NUMERATORE</name>
+        <field>NUMERATORE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>DENOMINATORE</name>
+        <field>DENOMINATORE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>INDICATORE</name>
+        <field>INDICATORE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>NUM_ITA_NOTELE</name>
+        <field>NUM_ITA_NOTELE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>DEN_ITA_NOTELE</name>
+        <field>DEN_ITA_NOTELE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>IND_ITA_NOTELE</name>
+        <field>IND_ITA_NOTELE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>NUM_AREA_NOTELE</name>
+        <field>NUM_AREA_NOTELE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>DEN_AREA_NOTELE</name>
+        <field>DEN_AREA_NOTELE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>IND_AREA_NOTELE</name>
+        <field>IND_AREA_NOTELE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>ANNO</name>
+        <rename>ANNO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>CODICE</name>
+        <rename>CODICE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>DESCRIZIONE</name>
+        <rename>DESCRIZIONE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>CODE_UN</name>
+        <rename>CODE_UN</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_ISTAT_COMUNE</name>
+        <rename>COD_ISTAT_COMUNE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COMUNE</name>
+        <rename>COMUNE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_PROVINCIA</name>
+        <rename>ID_PROVINCIA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>PROVINCIA</name>
+        <rename>PROVINCIA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_REGIONE</name>
+        <rename>ID_REGIONE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>REGIONE</name>
+        <rename>REGIONE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_REGIONE_MACRO_ISTAT</name>
+        <rename>ID_REGIONE_MACRO_ISTAT</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>REGIONE_MACRO_ISTAT</name>
+        <rename>REGIONE_MACRO_ISTAT</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>NUMERATORE</name>
+        <rename>NUMERATORE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>DENOMINATORE</name>
+        <rename>DENOMINATORE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>INDICATORE</name>
+        <rename>INDICATORE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>NUM_ITA_NOTELE</name>
+        <rename>NUM_ITA_NOTELE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>DEN_ITA_NOTELE</name>
+        <rename>DEN_ITA_NOTELE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>IND_ITA_NOTELE</name>
+        <rename>IND_ITA_NOTELE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>NUM_AREA_NOTELE</name>
+        <rename>NUM_AREA_NOTELE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>DEN_AREA_NOTELE</name>
+        <rename>DEN_AREA_NOTELE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>IND_AREA_NOTELE</name>
+        <rename>IND_AREA_NOTELE</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Dataset Roma Tre</name>
     <type>CsvInput</type>
@@ -449,7 +1045,7 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <filename>/Users/Max/Downloads/CarriereFileCSV20180517/ava16_A7_20180331_anon.csv</filename>
+    <filename>/Users/Max/Downloads/StudentsDataWarehouse/data source/ava16_A7_20180331_anon.csv</filename>
     <filename_field />
     <rownum_field />
     <include_filename>N</include_filename>
@@ -462,7 +1058,7 @@
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
     <format>mixed</format>
-    <encoding>UTF-8</encoding>
+    <encoding />
     <fields>
       <field>
         <name>INTERCLASSE</name>
@@ -749,8 +1345,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>160</xloc>
-      <yloc>128</yloc>
+      <xloc>176</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -765,12 +1361,287 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection />
+    <connection>DWH</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema />
-      <table>tabella di lookup</table>
+      <table>data_romatre</table>
+      <key>
+        <name>INTERCLASSE</name>
+        <field>INTERCLASSE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>CODE_UN</name>
+        <field>CODE_UN</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>CODICIONE</name>
+        <field>CODICIONE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>NOME_CORSO</name>
+        <field>NOME_CORSO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>COD_CLASSE</name>
+        <field>COD_CLASSE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>DES_CLASSE</name>
+        <field>DES_CLASSE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_COMUNE</name>
+        <field>ID_COMUNE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>COMUNE</name>
+        <field>COMUNE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_REGIONE_MACRO_ISTAT</name>
+        <field>ID_REGIONE_MACRO_ISTAT</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>REGIONE_MACRO_ISTAT</name>
+        <field>REGIONE_MACRO_ISTAT</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ANNO</name>
+        <field>ANNO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>CODICE</name>
+        <field>CODICE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>DESCRIZIONE</name>
+        <field>DESCRIZIONE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>NUMERATORE</name>
+        <field>NUMERATORE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>DENOMINATORE</name>
+        <field>DENOMINATORE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>INDICATORE</name>
+        <field>INDICATORE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>NUM_ATENEO</name>
+        <field>NUM_ATENEO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>DEN_ATENEO</name>
+        <field>DEN_ATENEO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>IND_ATENEO</name>
+        <field>IND_ATENEO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>NUM_ITA_NOTELE</name>
+        <field>NUM_ITA_NOTELE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>DEN_ITA_NOTELE</name>
+        <field>DEN_ITA_NOTELE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>IND_ITA_NOTELE</name>
+        <field>IND_ITA_NOTELE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>NUM_AREA_NOTELE</name>
+        <field>NUM_AREA_NOTELE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>DEN_AREA_NOTELE</name>
+        <field>DEN_AREA_NOTELE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>IND_AREA_NOTELE</name>
+        <field>IND_AREA_NOTELE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>INTERCLASSE</name>
+        <rename>INTERCLASSE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>CODE_UN</name>
+        <rename>CODE_UN</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>CODICIONE</name>
+        <rename>CODICIONE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>NOME_CORSO</name>
+        <rename>NOME_CORSO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_CLASSE</name>
+        <rename>COD_CLASSE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>DES_CLASSE</name>
+        <rename>DES_CLASSE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_COMUNE</name>
+        <rename>ID_COMUNE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COMUNE</name>
+        <rename>COMUNE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_REGIONE_MACRO_ISTAT</name>
+        <rename>ID_REGIONE_MACRO_ISTAT</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>REGIONE_MACRO_ISTAT</name>
+        <rename>REGIONE_MACRO_ISTAT</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ANNO</name>
+        <rename>ANNO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>CODICE</name>
+        <rename>CODICE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>DESCRIZIONE</name>
+        <rename>DESCRIZIONE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>NUMERATORE</name>
+        <rename>NUMERATORE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>DENOMINATORE</name>
+        <rename>DENOMINATORE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>INDICATORE</name>
+        <rename>INDICATORE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>NUM_ATENEO</name>
+        <rename>NUM_ATENEO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>DEN_ATENEO</name>
+        <rename>DEN_ATENEO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>IND_ATENEO</name>
+        <rename>IND_ATENEO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>NUM_ITA_NOTELE</name>
+        <rename>NUM_ITA_NOTELE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>DEN_ITA_NOTELE</name>
+        <rename>DEN_ITA_NOTELE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>IND_ITA_NOTELE</name>
+        <rename>IND_ITA_NOTELE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>NUM_AREA_NOTELE</name>
+        <rename>NUM_AREA_NOTELE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>DEN_AREA_NOTELE</name>
+        <rename>DEN_AREA_NOTELE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>IND_AREA_NOTELE</name>
+        <rename>IND_AREA_NOTELE</rename>
+        <update>Y</update>
+      </value>
     </lookup>
     <attributes />
     <cluster_schema />
@@ -781,8 +1652,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
-      <yloc>112</yloc>
+      <xloc>432</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
