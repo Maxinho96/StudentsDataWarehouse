@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Dimensioni</name>
+    <name>Fatti</name>
     <description />
     <extended_description />
     <trans_version />
@@ -428,9 +428,9 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2019/07/11 16:05:47.169</created_date>
+    <created_date>2019/07/11 16:47:37.916</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2019/07/11 16:05:47.169</modified_date>
+    <modified_date>2019/07/11 16:47:37.916</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -489,34 +489,94 @@
   </connection>
   <order>
     <hop>
-      <from>Input dimensions</from>
-      <to>Anno</to>
+      <from>input db ava</from>
+      <to>Indicatori</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Input dimensions</from>
-      <to>Atenei</to>
+      <from>Indicatori</from>
+      <to>Discard</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Input dimensions</from>
-      <to>CdS</to>
+      <from>Indicatori</from>
+      <to>Dummy</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Input dimensions</from>
-      <to>Classi</to>
+      <from>Dummy</from>
+      <to>RomaTre</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Input dimensions</from>
-      <to>Geografia</to>
+      <from>RomaTre</from>
+      <to>_RomaTre</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>_RomaTre</from>
+      <to>Table name</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Anno</from>
+      <to>Anno Lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table name</from>
+      <to>Anno Lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Anno Lookup</from>
+      <to>CdS Lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>CdS</from>
+      <to>CdS Lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Ateneo</from>
+      <to>Ateneo Lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>CdS Lookup</from>
+      <to>Ateneo Lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Classe</from>
+      <to>Classe Lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Ateneo Lookup</from>
+      <to>Classe Lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Geografia</from>
+      <to>Geografia Lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Classe Lookup</from>
+      <to>Geografia Lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Geografia Lookup</from>
+      <to>RomaTre 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
     <name>Anno</name>
-    <type>CombinationLookup</type>
+    <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -525,28 +585,15 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <schema>public</schema>
-    <table>Anno</table>
     <connection>DWH</connection>
-    <commit>100</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
-      <key>
-        <name>anno</name>
-        <lookup>"Anno"</lookup>
-      </key>
-      <return>
-        <name>KAnno</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence />
-    <last_update_field />
+    <sql>SELECT *
+FROM anno
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <attributes />
     <cluster_schema />
     <remotesteps>
@@ -556,14 +603,56 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
+      <xloc>1008</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Anno Lookup</name>
+    <type>StreamLookup</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <from>Anno</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>anno</name>
+        <field>Anno</field>
+      </key>
+      <value>
+        <name>KAnno</name>
+        <rename>KAnno</rename>
+        <default />
+        <type>BigNumber</type>
+      </value>
+    </lookup>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1008</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Atenei</name>
-    <type>CombinationLookup</type>
+    <name>Ateneo</name>
+    <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -572,28 +661,15 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <schema>public</schema>
-    <table>Ateneo</table>
     <connection>DWH</connection>
-    <commit>100</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
-      <key>
-        <name>code_un</name>
-        <lookup>"Codice"</lookup>
-      </key>
-      <return>
-        <name>"KAteneo"</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence />
-    <last_update_field />
+    <sql>SELECT *
+FROM ateneo
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <attributes />
     <cluster_schema />
     <remotesteps>
@@ -603,14 +679,56 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
-      <yloc>320</yloc>
+      <xloc>1264</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Ateneo Lookup</name>
+    <type>StreamLookup</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <from>Ateneo</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>code_un</name>
+        <field>codice</field>
+      </key>
+      <value>
+        <name>KAteneo</name>
+        <rename>KAteneo</rename>
+        <default />
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1264</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
     <name>CdS</name>
-    <type>CombinationLookup</type>
+    <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -619,36 +737,15 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <schema>public</schema>
-    <table>CdS</table>
     <connection>DWH</connection>
-    <commit>100</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
-      <key>
-        <name>interclasse</name>
-        <lookup>"Interclasse"</lookup>
-      </key>
-      <key>
-        <name>codicione</name>
-        <lookup>"Codicione"</lookup>
-      </key>
-      <key>
-        <name>nome_corso</name>
-        <lookup>"Nome"</lookup>
-      </key>
-      <return>
-        <name>"KCdS"</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence />
-    <last_update_field />
+    <sql>SELECT *
+FROM cds
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <attributes />
     <cluster_schema />
     <remotesteps>
@@ -658,14 +755,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
-      <yloc>448</yloc>
+      <xloc>1136</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Classi</name>
-    <type>CombinationLookup</type>
+    <name>CdS Lookup</name>
+    <type>StreamLookup</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -674,32 +771,23 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <schema>public</schema>
-    <table>Classe</table>
-    <connection>DWH</connection>
-    <commit>100</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
+    <from>CdS</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
       <key>
-        <name>cod_classe</name>
-        <lookup>"Codice"</lookup>
+        <name>codicione</name>
+        <field>Codicione</field>
       </key>
-      <key>
-        <name>des_classe</name>
-        <lookup>"Descrizione"</lookup>
-      </key>
-      <return>
-        <name>"KClasse"</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence />
-    <last_update_field />
+      <value>
+        <name>KCdS</name>
+        <rename>KCdS</rename>
+        <default />
+        <type>None</type>
+      </value>
+    </lookup>
     <attributes />
     <cluster_schema />
     <remotesteps>
@@ -709,14 +797,140 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
-      <yloc>560</yloc>
+      <xloc>1136</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Classe</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>DWH</connection>
+    <sql>SELECT *
+FROM classe
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1392</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Classe Lookup</name>
+    <type>StreamLookup</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <from>Classe</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>cod_classe</name>
+        <field>codice</field>
+      </key>
+      <value>
+        <name>KClasse</name>
+        <rename>KClasse</rename>
+        <default />
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1392</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Discard</name>
+    <type>Dummy</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>512</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Dummy</name>
+    <type>Dummy</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>576</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
     <name>Geografia</name>
-    <type>CombinationLookup</type>
+    <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -725,40 +939,15 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <schema>public</schema>
-    <table>Geografia</table>
     <connection>DWH</connection>
-    <commit>100</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
-      <key>
-        <name>comune</name>
-        <lookup>"Comune"</lookup>
-      </key>
-      <key>
-        <name>id_comune</name>
-        <lookup>"IdComune"</lookup>
-      </key>
-      <key>
-        <name>id_regione_macro_istat</name>
-        <lookup>"IdRegioneIstat"</lookup>
-      </key>
-      <key>
-        <name>regione_macro_istat</name>
-        <lookup>"RegioneIstat"</lookup>
-      </key>
-      <return>
-        <name>"KGeografia"</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence />
-    <last_update_field />
+    <sql>SELECT *
+FROM geografia
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <attributes />
     <cluster_schema />
     <remotesteps>
@@ -768,16 +957,360 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
-      <yloc>656</yloc>
+      <xloc>1520</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Input dimensions</name>
+    <name>Geografia Lookup</name>
+    <type>StreamLookup</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <from>Geografia</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>id_comune</name>
+        <field>IdComune</field>
+      </key>
+      <value>
+        <name>KGeografia</name>
+        <rename>KGeografia</rename>
+        <default />
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1520</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Indicatori</name>
+    <type>FilterRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <send_true_to>Dummy</send_true_to>
+    <send_false_to>Discard</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>codice</leftvalue>
+        <function>IN LIST</function>
+        <rightvalue />
+        <value>
+          <name>constant</name>
+          <type>String</type>
+          <text>iC01;iC02;iC06;iC14;iC15;iC15bis;iC16;iC21</text>
+          <length>-1</length>
+          <precision>-1</precision>
+          <isnull>N</isnull>
+          <mask />
+        </value>
+      </condition>
+    </compare>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>RomaTre</name>
+    <type>Dummy</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>672</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>RomaTre 2</name>
+    <type>TableOutput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>DWH</connection>
+    <schema>public</schema>
+    <table>romatre_fatti</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field />
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field />
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field />
+    <fields>
+      <field>
+        <column_name>numeratore</column_name>
+        <stream_name>numeratore</stream_name>
+      </field>
+      <field>
+        <column_name>denominatore</column_name>
+        <stream_name>denominatore</stream_name>
+      </field>
+      <field>
+        <column_name>KAnno</column_name>
+        <stream_name>KAnno</stream_name>
+      </field>
+      <field>
+        <column_name>KCdS</column_name>
+        <stream_name>KCdS</stream_name>
+      </field>
+      <field>
+        <column_name>KAteneo</column_name>
+        <stream_name>KAteneo</stream_name>
+      </field>
+      <field>
+        <column_name>KClasse</column_name>
+        <stream_name>KClasse</stream_name>
+      </field>
+      <field>
+        <column_name>KGeografia</column_name>
+        <stream_name>KGeografia</stream_name>
+      </field>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1632</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Table name</name>
+    <type>ConcatFields</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <separator />
+    <enclosure>""</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding />
+    <endedLine />
+    <fileNameInField>N</fileNameInField>
+    <fileNameField />
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>file</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format />
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>quotes</name>
+        <type>None</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif />
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>codice</name>
+        <type>None</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif />
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>table_suffix</name>
+        <type>None</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif />
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>quotes</name>
+        <type>None</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif />
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+      <targetFieldName>table_name</targetFieldName>
+      <targetFieldLength>0</targetFieldLength>
+      <removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>864</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>_RomaTre</name>
+    <type>Constant</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>table_suffix</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif>_RomaTre</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>quotes</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif>"</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>768</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>input db ava</name>
     <type>TableInput</type>
     <description />
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution />
     <copies>1</copies>
     <partitioning>
@@ -827,8 +1360,8 @@ FROM "public".data_romatre
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>304</yloc>
+      <xloc>160</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
